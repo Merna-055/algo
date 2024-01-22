@@ -114,3 +114,124 @@ int main() {
 
     return 0;
 }
+
+
+#The update (Intro Sorting and Searching Algorithm)
+#Problem 1:
+def sum_of_distinct_elements(set1, set2):
+    combined_set = set(set1 + set2)   
+    return sum(combined_set)
+
+# Example usage:
+set1 = [3, 1, 7, 9]
+set2 = [2, 4, 1, 9, 3]
+result = sum_of_distinct_elements(set1, set2)
+print("Output:", result)
+
+#Problem 2:
+def dot_product(v1, v2):
+   
+    return sum(x * y for x, y in zip(v1, v2))
+
+def are_orthogonal(v1, v2):
+    
+    return dot_product(v1, v2) == 0
+
+n = 3
+vector_pairs = [([1, 0], [0, 1]), ([2, -1], [1, 2]), ([3, 4], [4, -3])]
+
+for i in range(n):
+    v1, v2 = vector_pairs[i]
+    if are_orthogonal(v1, v2):
+        print(f"Vectors {v1} and {v2} are orthogonal.")
+    else:
+        print(f"Vectors {v1} and {v2} are not orthogonal.")
+
+
+
+#Algorithm in C++
+#Problem 1:
+#include <iostream>
+#include <unordered_set>
+#include <vector>
+
+int sum_of_distinct_elements(const std::vector<int>& set1, const std::vector<int>& set2) {
+    // Combine the sets and use an unordered_set to get distinct elements
+    std::unordered_set<int> combined_set(set1.begin(), set1.end());
+    combined_set.insert(set2.begin(), set2.end());
+
+    // Calculate and return the sum of distinct elements
+    int sum = 0;
+    for (int element : combined_set) {
+        sum += element;
+    }
+
+    return sum;
+}
+
+int main() {
+    // Example usage:
+    std::vector<int> set1 = {3, 1, 7, 9};
+    std::vector<int> set2 = {2, 4, 1, 9, 3};
+
+    int result = sum_of_distinct_elements(set1, set2);
+    std::cout << "Output: " << result << std::endl;
+
+    return 0;
+}
+
+
+#Problem 2:
+#include <iostream>
+#include <vector>
+
+int dot_product(const std::vector<int>& v1, const std::vector<int>& v2) {
+    // Calculate dot product of two vectors
+    int result = 0;
+    for (size_t i = 0; i < v1.size(); ++i) {
+        result += v1[i] * v2[i];
+    }
+    return result;
+}
+
+bool are_orthogonal(const std::vector<int>& v1, const std::vector<int>& v2) {
+    // Check if the dot product of the two vectors is zero
+    return dot_product(v1, v2) == 0;
+}
+
+int main() {
+    // Example usage for n pairs of vectors:
+    const int n = 3;
+    std::vector<std::pair<std::vector<int>, std::vector<int>>> vector_pairs = {
+        {{1, 0}, {0, 1}},
+        {{2, -1}, {1, 2}},
+        {{3, 4}, {4, -3}}
+    };
+
+    for (int i = 0; i < n; ++i) {
+        const auto& [v1, v2] = vector_pairs[i];
+        if (are_orthogonal(v1, v2)) {
+            std::cout << "Vectors ";
+            for (int element : v1) {
+                std::cout << element << " ";
+            }
+            std::cout << "and ";
+            for (int element : v2) {
+                std::cout << element << " ";
+            }
+            std::cout << "are orthogonal." << std::endl;
+        } else {
+            std::cout << "Vectors ";
+            for (int element : v1) {
+                std::cout << element << " ";
+            }
+            std::cout << "and ";
+            for (int element : v2) {
+                std::cout << element << " ";
+            }
+            std::cout << "are not orthogonal." << std::endl;
+        }
+    }
+
+    return 0;
+}
