@@ -1,0 +1,75 @@
+#Pseudocode
+def sentence_analysis(sentence):
+
+    length_counter = 0
+    word_counter = 0
+    vowel_counter = 0
+
+   
+    for char in sentence:
+        length_counter += 1
+
+        if char == ' ':    
+            word_counter += 1
+
+        # Check if the character is a vowel (case-insensitive)
+        if char.lower() in ['a', 'e', 'i', 'o', 'u']:
+            vowel_counter += 1
+           word_counter += 1
+
+  
+    print(f"Length of the sentence: {length_counter}")
+    print(f"Number of words in the sentence: {word_counter}")
+    print(f"Number of vowels in the sentence: {vowel_counter}")
+
+# Example usage:
+sentence = "This is a sample sentence."
+sentence_analysis(sentence)
+
+
+
+#Algorithm with c++
+
+#include <iostream>
+#include <cctype> // for isalpha()
+
+int main() {
+  
+    int lengthCounter = 0;
+    int wordCounter = 0;
+    int vowelCounter = 0;
+
+
+    std::cout << "Enter a sentence ending with a period: ";
+    std::string sentence;
+    std::getline(std::cin, sentence);
+
+  
+    for (char c : sentence) {
+     
+        lengthCounter++;
+
+        
+        if (c == ' ') {
+           
+            wordCounter++;
+        }
+
+        
+        if (std::tolower(c) == 'a' || std::tolower(c) == 'e' || std::tolower(c) == 'i' ||
+            std::tolower(c) == 'o' || std::tolower(c) == 'u') {
+            vowelCounter++;
+        }
+    }
+
+    wordCounter++;
+
+   
+    std::cout << "Length of the sentence: " << lengthCounter << std::endl;
+    std::cout << "Number of words in the sentence: " << wordCounter << std::endl;
+    std::cout << "Number of vowels in the sentence: " << vowelCounter << std::endl;
+
+    return 0;
+}
+
+
