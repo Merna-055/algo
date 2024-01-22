@@ -1,0 +1,116 @@
+#Problem 1:
+def sum_of_distinct_elements(set1, set2):
+    distinct_elements = set(set1 + set2)
+    return sum(distinct_elements)
+
+# Example usage:
+set1 = [3, 1, 7, 9]
+set2 = [2, 4, 1, 9, 3]
+result = sum_of_distinct_elements(set1, set2)
+print("Output:", result)
+
+#Problem 2:
+def dot_product(v1, v2):
+    return sum(x * y for x, y in zip(v1, v2))
+
+def are_orthogonal(v1, v2):
+    result = dot_product(v1, v2)
+    return result == 0
+
+def check_orthogonality_for_n_pairs(vectors_list):
+    n = len(vectors_list)
+    for i in range(n):
+        for j in range(i + 1, n):
+            v1 = vectors_list[i]
+            v2 = vectors_list[j]
+            orthogonal = are_orthogonal(v1, v2)
+            print(f"Vectors {v1} and {v2} are orthogonal: {orthogonal}")
+
+# Example usage:
+vectors_list = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [0, 1, -1],
+    [2, -1, 0]
+]
+
+#Algorithm using c++:
+#Problem 1:
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int sum_of_distinct_elements(const std::vector<int>& set1, const std::vector<int>& set2) {
+    std::vector<int> distinct_elements;
+    distinct_elements.insert(distinct_elements.end(), set1.begin(), set1.end());
+    distinct_elements.insert(distinct_elements.end(), set2.begin(), set2.end());
+
+    std::sort(distinct_elements.begin(), distinct_elements.end());
+    distinct_elements.erase(std::unique(distinct_elements.begin(), distinct_elements.end()), distinct_elements.end());
+
+    int sum = 0;
+    for (int element : distinct_elements) {
+        sum += element;
+    }
+    return sum;
+}
+
+int main() {
+    std::vector<int> set1 = {3, 1, 7, 9};
+    std::vector<int> set2 = {2, 4, 1, 9, 3};
+
+    int result = sum_of_distinct_elements(set1, set2);
+
+    std::cout << "Output: " << result << std::endl;
+
+    return 0;
+}
+
+#Problem 2:
+#include <iostream>
+#include <vector>
+
+int dot_product(const std::vector<int>& v1, const std::vector<int>& v2) {
+    int result = 0;
+    for (size_t i = 0; i < v1.size(); ++i) {
+        result += v1[i] * v2[i];
+    }
+    return result;
+}
+
+bool are_orthogonal(const std::vector<int>& v1, const std::vector<int>& v2) {
+    return dot_product(v1, v2) == 0;
+}
+
+void check_orthogonality_for_n_pairs(const std::vector<std::vector<int>>& vectors_list) {
+    size_t n = vectors_list.size();
+    for (size_t i = 0; i < n; ++i) {
+        for (size_t j = i + 1; j < n; ++j) {
+            const std::vector<int>& v1 = vectors_list[i];
+            const std::vector<int>& v2 = vectors_list[j];
+            bool orthogonal = are_orthogonal(v1, v2);
+            std::cout << "Vectors ";
+            for (int elem : v1) {
+                std::cout << elem << " ";
+            }
+            std::cout << "and ";
+            for (int elem : v2) {
+                std::cout << elem << " ";
+            }
+            std::cout << "are orthogonal: " << (orthogonal ? "true" : "false") << std::endl;
+        }
+    }
+}
+
+int main() {
+    std::vector<std::vector<int>> vectors_list = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {0, 1, -1},
+        {2, -1, 0}
+    };
+
+    check_orthogonality_for_n_pairs(vectors_list);
+
+    return 0;
+}
